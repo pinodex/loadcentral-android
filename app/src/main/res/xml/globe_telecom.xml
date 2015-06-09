@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<globe_telecom>
+	<product type="variable" name="Other Denomination" code="GMXMAX%s" />
+	<product type="fixed" name="Aload 10" code="GMX10" />
+	<product type="fixed" name="Aload 100" code="GMX100" />
+	<product type="fixed" name="Amax 350" code="GMX350" />
+	<product type="fixed" name="Amax 450" code="GMX450" />
+	<product type="fixed" name="Amax 550" code="GMX550" />
+	<product type="fixed" name="Amax 600" code="GMX600" />
+	<product type="fixed" name="Amax 700" code="GMX700" />
+	<product type="fixed" name="Amax 900" code="GMX900" />
+	<product type="fixed" name="GO Unli 25" code="GOUNLI25" />
+	<product type="fixed" name="GO Unli 30" code="GOUNLI30" />
+	<product type="fixed" name="GO Unli 80" code="GOUNLI80" />
+	<product type="fixed" name="GO Unli 180" code="GOUNLI180" />
+	<product type="fixed" name="GO Unli 750" code="GOUNLI750" />
+	<product type="fixed" name="Super All Txt 20" code="SUPERALLTXT20" />
+	<product type="fixed" name="Super FB 10" code="SUPERFB10" />
+	<product type="fixed" name="Supersurf 50" code="SUPERSURF50" />
+	<product type="fixed" name="Supersurf 120" code="SUPERSURF120" />
+	<product type="fixed" name="Supersurf 200" code="SUPERSURF200" />
+	<product type="fixed" name="Super UNLI 25" code="SUPERUNLI25" />
+</globe_telecom>

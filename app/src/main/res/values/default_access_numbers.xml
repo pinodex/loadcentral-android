@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_access_numbers">
+        <item>09229990214</item>
+        <item>09228504340</item>
+        <item>09209456856</item>
+        <item>09178662418</item>
+        <item>09209456857</item>
+        <item>222</item>
+    </string-array>
+</resources>

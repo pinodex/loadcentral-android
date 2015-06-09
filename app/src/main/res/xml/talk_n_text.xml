@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<talk_n_text>
+	<product type="fixed" name="Regular 15" code="SM15" />
+	<product type="fixed" name="Regular 20" code="SM20" />
+	<product type="fixed" name="Regular 30" code="SM30" />
+	<product type="fixed" name="Regular 50" code="SM50" />
+	<product type="fixed" name="Regular 60" code="SM60" />
+	<product type="fixed" name="Regular 100" code="SM100" />
+	<product type="fixed" name="Regular 115" code="SM115" />
+	<product type="fixed" name="Regular 200" code="SM200" />
+	<product type="fixed" name="Regular 250" code="SM250" />
+	<product type="fixed" name="Regular 300" code="SM300" />
+	<product type="fixed" name="Regular 500" code="SM500" />
+	<product type="fixed" name="Regular 1000" code="SM1000" />
+	<product type="fixed" name="GaanTxt 10" code="SMGT10" />
+	<product type="fixed" name="GaanTxt 20" code="SMGT20" />
+	<product type="fixed" name="All Text 10" code="SMAT10" />
+	<product type="fixed" name="All Text 30 MMS" code="SMAT30MMS" />
+	<product type="fixed" name="All Text 40" code="SMAT40" />
+	<product type="fixed" name="All Text 50" code="SMAT50" />
+	<product type="fixed" name="UPSIZE 20" code="SMUP20" />
+	<product type="fixed" name="UPSIZE 35" code="SMUP35" />
+	<product type="fixed" name="UPSIZE 70" code="SMUP70" />
+	<product type="fixed" name="UPSIZE 130" code="SMUP130" />
+</talk_n_text>

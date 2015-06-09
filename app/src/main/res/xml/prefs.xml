@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/application">
+
+        <EditTextPreference
+            android:key="sms_password"
+            android:title="@string/set_sms_password"
+            android:summary="@string/set_sms_password_desc"
+            android:password="true" />
+
+        <ListPreference
+            android:key="preferred_sim"
+            android:title="@string/preferred_sim"
+            android:summary="@string/preferred_sim_desc"
+            android:enabled="false" />
+
+        <Preference
+            android:key="access_numbers"
+            android:title="@string/access_numbers"
+            android:summary="@string/access_numbers_desc" />
+
+        <CheckBoxPreference
+            android:key="use_preferred_access_number"
+            android:title="@string/use_preferred_access_number"
+            android:summary="@string/use_preferred_access_number_desc" />
+
+        <ListPreference
+            android:key="preferred_access_number"
+            android:title="@string/select_preferred_access_number"
+            android:summary="@string/select_preferred_access_number_desc"
+            android:dependency="use_preferred_access_number" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/about">
+
+        <Preference
+            android:key="about_screen"
+            android:title="@string/about"
+            android:summary="@string/tap_for_more_info" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

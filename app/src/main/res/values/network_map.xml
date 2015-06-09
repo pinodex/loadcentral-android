@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="network_map">
+        <item>@array/globe_telecom</item>
+        <item>@array/tm</item>
+        <item>@array/smart</item>
+        <item>@array/talk_n_text</item>
+        <item>@array/sun_cellular</item>
+        <item>@array/red_mobile</item>
+    </array>
+</resources>

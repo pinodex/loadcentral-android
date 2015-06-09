@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<red_mobile>
+	<product type="fixed" name="Regular 10" code="RED10" />
+	<product type="fixed" name="Regular 20" code="RED20" />
+	<product type="fixed" name="Regular 30" code="RED30" />
+	<product type="fixed" name="Regular 50" code="RED50" />
+	<product type="fixed" name="Regular 100" code="RED100" />
+	<product type="fixed" name="Regular 200" code="RED200" />
+	<product type="fixed" name="Regular 300" code="RED300" />
+	<product type="fixed" name="Regular 500" code="RED500" />
+	<product type="fixed" name="Call &amp; Text 30" code="REDCTU30" />
+	<product type="fixed" name="Call &amp; Text 100" code="REDCTU100" />
+	<product type="fixed" name="Call &amp; Text 250" code="REDCTU250" />
+	<product type="fixed" name="Call &amp; Text 750" code="REDCTU750" />
+</red_mobile>

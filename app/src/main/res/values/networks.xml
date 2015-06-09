@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="globe_telecom">
+        <item>globe_telecom</item>
+        <item>Globe Telecom</item>
+        <item>#2C3B99</item>
+        <item>#FFFFFF</item>
+    </string-array>
+    <string-array name="tm">
+        <item>tm</item>
+        <item>TM</item>
+        <item>#E51E23</item>
+        <item>#FFFFFF</item>
+    </string-array>
+    <string-array name="smart">
+        <item>smart</item>
+        <item>Smart</item>
+        <item>#00A1D8</item>
+        <item>#FFFFFF</item>
+    </string-array>
+    <string-array name="talk_n_text">
+        <item>talk_n_text</item>
+        <item>Talk n Text</item>
+        <item>#FEC10F</item>
+        <item>#FFFFFF</item>
+    </string-array>
+    <string-array name="sun_cellular">
+        <item>sun_cellular</item>
+        <item>Sun Cellular</item>
+        <item>#FEB911</item>
+        <item>#FFFFFF</item>
+    </string-array>
+    <string-array name="red_mobile">
+        <item>red_mobile</item>
+        <item>Red Mobile</item>
+        <item>#C81C22</item>
+        <item>#FFFFFF</item>
+    </string-array>
+</resources>

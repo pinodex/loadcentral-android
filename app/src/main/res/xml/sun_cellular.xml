@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sun_cellular>
+	<product type="fixed" name="Regular 10" code="SNX10" />
+	<product type="fixed" name="Regular 15" code="SNX15" />
+	<product type="fixed" name="Regular 20" code="SNX20" />
+	<product type="fixed" name="Regular 25" code="SNX25" />
+	<product type="fixed" name="Regular 30" code="SNX30" />
+	<product type="fixed" name="Regular 50" code="SNX50" />
+	<product type="fixed" name="Regular 75" code="SNX75" />
+	<product type="fixed" name="Regular 100" code="SNX100" />
+	<product type="fixed" name="Regular 150" code="SNX150" />
+	<product type="fixed" name="Regular 300" code="SNX300" />
+	<product type="fixed" name="Regular 500" code="SNX500" />
+	<product type="fixed" name="Call &amp; Text Unli 25" code="CTU25" />
+	<product type="fixed" name="Call &amp; Text Unli 50" code="CTU50" />
+	<product type="fixed" name="Call &amp; Text Unli 100" code="CTU100" />
+	<product type="fixed" name="Call &amp; Text Unli 150" code="CTU150" />
+	<product type="fixed" name="Call &amp; Text Unli 450" code="CTU450" />
+	<product type="fixed" name="Text Unli 20" code="SNXTU20" />
+	<product type="fixed" name="Text Unli 50" code="SNXTU50" />
+	<product type="fixed" name="Text Unli 60" code="SNXTU60" />
+	<product type="fixed" name="Text Unli 150" code="SNXTU150" />
+	<product type="fixed" name="Text Unli 200" code="SNXTU200" />
+	<product type="fixed" name="Text Unli 300" code="SNXTU300" />
+	<product type="fixed" name="Call &amp; Text Combo 10" code="SNXCTC10" />
+	<product type="fixed" name="Call &amp; Text Combo 20" code="SNXCTC20" />
+	<product type="fixed" name="Call &amp; Text Combo 30" code="SNXCTC30" />
+	<product type="fixed" name="Call &amp; Text Combo 50" code="SNXCTC50" />
+	<product type="fixed" name="Call &amp; Text Combo 150" code="SNXCTC150" />
+</sun_cellular>

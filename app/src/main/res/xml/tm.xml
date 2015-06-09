@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tm>
+	<product type="variable" name="Other Denomination" code="TMXMAX%s" />
+	<product type="fixed" name="Aload 10" code="TMX10" />
+	<product type="fixed" name="Aload 50" code="TMX50" />
+	<product type="fixed" name="Aload 100" code="TMX100" />
+	<product type="fixed" name="Astig FB 10" code="ASTIGFB10" />
+	<product type="fixed" name="Astig Text 10" code="ASTIGTXT10" />
+	<product type="fixed" name="Astig Text 15" code="ASTIGTXT15" />
+	<product type="fixed" name="Astig Text 30" code="ASTIGTXT30" />
+	<product type="fixed" name="Combo 10" code="COMBO10" />
+	<product type="fixed" name="Combo 15" code="COMBO15" />
+	<product type="fixed" name="Sulit Txt 15" code="SULITTXT10" />
+</tm>
