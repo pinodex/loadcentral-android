@@ -1,7 +1,9 @@
-package com.pinodex.loadcentral;
+package com.pinodex.loadcentral.Util;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.pinodex.loadcentral.App;
 
 /**
  * Created by pinodex on 4/10/15.

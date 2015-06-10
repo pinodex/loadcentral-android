@@ -2,7 +2,6 @@ package com.pinodex.loadcentral;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,16 +15,19 @@ import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.pinodex.loadcentral.Sender.Sender;
+import com.pinodex.loadcentral.Sender.Sms;
+import com.pinodex.loadcentral.Util.IndeterminateLoader;
+import com.pinodex.loadcentral.Util.Prompt;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -41,19 +43,7 @@ public class SellProductActivity extends ActionBarActivity {
 
     Spinner productListDropdown;
 
-    TelephonyInfo telephonyInfo;
-
-    int simId = 0;
-
-    boolean setSimToUse = false;
-
-    String smsPassword;
-
-    String accessNumber;
-
-    String recipientNumber;
-
-    String[] product;
+    Sender sender;
 
     ProgressDialog progressDialog;
 
@@ -69,11 +59,13 @@ public class SellProductActivity extends ActionBarActivity {
         resources = getResources();
 
         Bundle bundle = getIntent().getExtras();
+
         String networkId = bundle.getString("networkId");
         String networkName = bundle.getString("networkName");
         String networkBg = bundle.getString("networkBg");
         String networkTc = bundle.getString("networkTc");
-        smsPassword = bundle.getString("smsPassword");
+
+        sender = new Sms(this).setCommand("LOAD");
 
         setTitle(networkName);
 
@@ -87,11 +79,6 @@ public class SellProductActivity extends ActionBarActivity {
 
         sendButton.setBackgroundColor(Color.parseColor(networkBg));
         sendButton.setTextColor(Color.parseColor(networkTc));
-
-        if (smsPassword == null) {
-            finish();
-            return;
-        }
 
         productsList.clear();
 
@@ -150,21 +137,15 @@ public class SellProductActivity extends ActionBarActivity {
                 sendButton.setEnabled(false);
                 sendButton.setClickable(false);
 
-                sendMsgCheck();
+                processLoad();
 
                 sendButton.setEnabled(true);
                 sendButton.setClickable(true);
             }
         });
 
-        telephonyInfo = TelephonyInfo.getInstance(this);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog = new IndeterminateLoader(this);
         progressDialog.setMessage(resources.getString(R.string.sending_sms));
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
 
         smsSentReciever = new BroadcastReceiver() {
             @Override
@@ -173,13 +154,13 @@ public class SellProductActivity extends ActionBarActivity {
 
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
-                        showDialogPrompt(R.string.success, R.string.sms_sent, true);
+                        Prompt.showSuccess(SellProductActivity.this, R.string.sms_sent, true);
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
                     case SmsManager.RESULT_ERROR_NO_SERVICE:
                     case SmsManager.RESULT_ERROR_NULL_PDU:
                     case SmsManager.RESULT_ERROR_RADIO_OFF:
-                        showDialogPrompt(R.string.success, resources.getString(R.string.sms_not_sent_code, getResultCode()), false);
+                        Prompt.showError(SellProductActivity.this, resources.getString(R.string.sms_not_sent_code, getResultCode()), false);
                         break;
                 }
             }
@@ -192,10 +173,10 @@ public class SellProductActivity extends ActionBarActivity {
 
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
-                        showDialogPrompt(R.string.success, R.string.sms_sent, true);
+                        Prompt.showSuccess(SellProductActivity.this, R.string.sms_sent, true);
                         break;
                     case Activity.RESULT_CANCELED:
-                        showDialogPrompt(R.string.success, R.string.sms_not_sent, false);
+                        Prompt.showError(SellProductActivity.this, R.string.sms_not_sent, false);
                         break;
                 }
             }
@@ -213,18 +194,18 @@ public class SellProductActivity extends ActionBarActivity {
         return products;
     }
 
-    private void sendMsgCheck() {
+    private void processLoad() {
         final String[] productSelection = productsList.get(productListDropdown.getSelectedItemPosition());
         final String quantity = ((EditText) findViewById(R.id.quantityInput)).getText().toString();
         final String number = ((EditText) findViewById(R.id.mobileNumberInput)).getText().toString();
 
         if (productSelection[0].equals("variable") && (quantity.isEmpty() || quantity.equals("0"))) {
-            showDialogPrompt(R.string.error, R.string.invalid_quantity, false);
+            Prompt.showError(this, R.string.invalid_quantity, false);
             return;
         }
 
         if (!number.matches("(0|63)[0-9]{10}")) {
-            showDialogPrompt(R.string.error, R.string.invalid_number, false);
+            Prompt.showError(this, R.string.invalid_number, false);
             return;
         }
 
@@ -242,172 +223,26 @@ public class SellProductActivity extends ActionBarActivity {
                     quantity, productSelection[2], number);
         }
 
-        product = productSelection;
-        recipientNumber = number;
+        sender.setProduct(productSelection);
+        sender.setRecipientNumber(number);
 
-        AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(this);
-        confirmationDialog
-                .setTitle(R.string.confirmation)
-                .setMessage(confirmationText)
-                .setCancelable(false)
-                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sendSmsPre();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).show();
-    }
-
-    private void sendSmsPre() {
-        if (Preferences.getBoolean("use_preferred_access_number")) {
-            String preferredAccessNumber = Preferences.getString("preferred_access_number");
-
-            if (preferredAccessNumber != null) {
-                accessNumber = preferredAccessNumber;
-            }
-        }
-
-        if (accessNumber == null) {
-            final String[] accessNumberArray = TextUtils.split(Preferences.getString("access_numbers"), ",");
-
-            ListView accessNumberList = new ListView(this);
-            ArrayAdapter<String> accessNumberAdapter = new ArrayAdapter<>(this, R.layout.default_list_layout, accessNumberArray);
-
-            AlertDialog.Builder accessNumberListDialogBuilder = new AlertDialog.Builder(this);
-            accessNumberListDialogBuilder
-                    .setTitle(R.string.select_access_number)
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .setView(accessNumberList);
-
-            final AlertDialog accessNumberListDialog = accessNumberListDialogBuilder.create();
-
-            accessNumberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        new AlertDialog.Builder(this).setTitle(R.string.confirmation)
+            .setMessage(confirmationText)
+            .setCancelable(false)
+            .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    accessNumber = accessNumberArray[position];
-                    accessNumberListDialog.dismiss();
-
-                    sendSmsPre();
+                public void onClick(DialogInterface dialog, int which) {
+                    sender.setProgressDialog(progressDialog);
+                    sender.send();
                 }
-            });
-            accessNumberList.setAdapter(accessNumberAdapter);
-            accessNumberListDialog.show();
-
-            return;
-        }
-
-        if (!setSimToUse && telephonyInfo.isDualSIM()) {
-            String preferredSim = Preferences.getString("preferred_sim");
-
-            if (preferredSim != null) {
-                simId = Integer.valueOf(preferredSim);
-            }
-
-            if (simId == 0) {
-                ListView simList = new ListView(this);
-                ArrayAdapter<String> accessNumberAdapter = new ArrayAdapter<>(this, R.layout.default_list_layout, new String[] {
-                        "Sim 1", "Sim 2"
-                });
-
-                AlertDialog.Builder simListDialogBuilder = new AlertDialog.Builder(this);
-                simListDialogBuilder
-                        .setTitle(R.string.select_sim)
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                accessNumber = null;
-                                dialog.dismiss();
-                            }
-                        })
-                        .setView(simList);
-
-                final AlertDialog simListDialog = simListDialogBuilder.create();
-
-                simList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        simId = position + 1;
-                        setSimToUse = true;
-
-                        simListDialog.dismiss();
-                        sendSmsPre();
-                    }
-                });
-                simList.setAdapter(accessNumberAdapter);
-                simListDialog.show();
-
-                return;
-            }
-        }
-
-        sendSmsPost();
-    }
-
-    private void sendSmsPost() {
-        progressDialog.show();
-
-        String smsContent = product[2] + " " + smsPassword + " " + recipientNumber;
-
-        PendingIntent sentConfirmation = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
-        PendingIntent deliveryConfirmation = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
-
-        SmsUtil.send(this, simId, accessNumber, null, smsContent, sentConfirmation, deliveryConfirmation);
-
-        accessNumber = null;
-        setSimToUse = false;
-    }
-
-    private void showDialogPrompt(Integer title, Integer message, final Boolean finishAfter) {
-        AlertDialog.Builder errorDialog = new AlertDialog.Builder(this);
-
-        errorDialog
-                .setCancelable(false)
-                .setTitle(title)
-                .setMessage(message)
-                .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                        if (finishAfter) {
-                            finish();
-                            overridePendingTransition(R.anim.activity_leave_in, R.anim.activity_leave_out);
-                        }
-                    }
-                })
-                .show();
-    }
-
-    private void showDialogPrompt(Integer title, String message, final Boolean finishAfter) {
-        AlertDialog.Builder errorDialog = new AlertDialog.Builder(this);
-
-        errorDialog
-                .setCancelable(false)
-                .setTitle(title)
-                .setMessage(message)
-                .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                        if (finishAfter) {
-                            finish();
-                            overridePendingTransition(R.anim.activity_leave_in, R.anim.activity_leave_out);
-                        }
-                    }
-                })
-                .show();
+            })
+            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            })
+            .show();
     }
 
     @Override

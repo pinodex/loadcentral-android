@@ -9,6 +9,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
+import com.pinodex.loadcentral.Util.Preferences;
+import com.pinodex.loadcentral.Util.TelephonyInfo;
+
 public class SettingsActivity extends ActionBarActivity {
 
     public static boolean doRefresh = false;
@@ -95,7 +98,7 @@ public class SettingsActivity extends ActionBarActivity {
             aboutScreenLink.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(App.getContext(), AboutScreen.class);
+                    Intent intent = new Intent(App.getContext(), AboutScreenActivity.class);
                     startActivity(intent);
 
                     return true;

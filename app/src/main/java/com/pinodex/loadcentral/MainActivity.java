@@ -19,6 +19,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.pinodex.loadcentral.Sender.Sms;
+import com.pinodex.loadcentral.Util.Preferences;
+
 public class MainActivity extends ActionBarActivity {
 
     public static String[][] mobileNetworks;
@@ -34,7 +37,6 @@ public class MainActivity extends ActionBarActivity {
         // Todo: Fix action bar being extended when keyboard is shown.
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(resources.getColor(R.color.white));
-        // Todo: XML workaround this ^
 
         if (Preferences.getString("sms_password") == null) {
             LayoutInflater li = LayoutInflater.from(this);
@@ -64,9 +66,8 @@ public class MainActivity extends ActionBarActivity {
                         public void onClick(View view) {
                             String newSmsPassword = userInput.getText().toString();
 
-                            if (newSmsPassword == null || newSmsPassword.isEmpty()) {
-                                Toast.makeText(MainActivity.this, R.string.invalid_password_format,
-                                        Toast.LENGTH_SHORT).show();
+                            if (newSmsPassword.isEmpty()) {
+                                Toast.makeText(MainActivity.this, R.string.invalid_password_format, Toast.LENGTH_SHORT).show();
 
                                 return;
                             }
@@ -123,7 +124,6 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra("networkName", mobileNetworks[position][1]);
                 intent.putExtra("networkBg", mobileNetworks[position][2]);
                 intent.putExtra("networkTc", mobileNetworks[position][3]);
-                intent.putExtra("smsPassword", Preferences.getString("sms_password"));
 
                 startActivity(intent);
                 overridePendingTransition(R.anim.activity_go_in, R.anim.activity_go_out);
@@ -152,6 +152,27 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+
+            return true;
+        }
+
+        if (id == R.id.action_balance_inquiry) {
+            new AlertDialog.Builder(this).setTitle(R.string.confirmation)
+                .setMessage(R.string.action_balance_inquiry_confirm)
+                .setCancelable(false)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Sms(MainActivity.this).setCommand("BAL").send();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
 
             return true;
         }

@@ -1,4 +1,4 @@
-package com.pinodex.loadcentral;
+package com.pinodex.loadcentral.Util;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;

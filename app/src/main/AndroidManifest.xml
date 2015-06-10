@@ -54,7 +54,7 @@
                 android:value="com.pinodex.loadcentral.SettingsActivity" />
         </activity>
         <activity
-            android:name=".AboutScreen"
+            android:name=".AboutScreenActivity"
             android:parentActivityName=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeMaterial" >

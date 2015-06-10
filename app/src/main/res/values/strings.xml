@@ -3,12 +3,15 @@
 
     <string name="app_name">LoadCentral</string>
     <string name="action_settings">Settings</string>
+    <string name="action_balance_inquiry">Balance Inquiry</string>
+    <string name="action_balance_inquiry_confirm">This will send a balance inquiry SMS</string>
     <string name="success">Success</string>
     <string name="error">Error</string>
     <string name="save">Save</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="close">Close</string>
     <string name="confirmation">Confirmation</string>
     <string name="loading">Loading</string>
     <string name="quantity">Quantity</string>
@@ -50,12 +53,20 @@
     <string name="tap_for_more_info">Tap for more information</string>
     <string name="loadcentral_for_android">LoadCentral for Android</string>
     <string name="version">Version %s</string>
-    <string name="created_by">Created by Raph Marco</string>
+    <string name="created_by">Developed by Raph Marco</string>
     <string name="app_disclaimer">
         This is a 3rd party app and is in no way sponsored, endorsed, or administered by
         LoadCentral or Uniwiz Trade Sales Inc. This app is not liable for any damages due
         to any interaction with this app. By using this app, you agree to the terms stated
         here.
+    </string>
+    <string name="app_privacy_policy">Privacy Policy</string>
+    <string name="app_privacy_policy_content">
+        This application does not collect and transmit any data from your phone. The permissions
+        requested by this app and it\'s usage are the following: \n\n1. Sending SMS - this is used to
+        send SMS command to LoadCentral access numbers. It will not be used for purposes other than
+        communicating with LoadCentral access numbers. \n\n2. Reading phone state - this is used to check
+        if the phone has dual SIM so that you can have choices what SIM to use when sending SMS.
     </string>
 
 </resources>

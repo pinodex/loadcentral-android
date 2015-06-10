@@ -10,4 +10,10 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_balance_inquiry"
+        android:title="@string/action_balance_inquiry"
+        android:orderInCategory="110"
+        app:showAsAction="never" />
+
 </menu>
