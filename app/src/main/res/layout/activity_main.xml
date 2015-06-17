@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <android.support.v7.widget.Toolbar
@@ -29,18 +29,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/lc_logo"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:layout_centerInParent="true" />
 
         </RelativeLayout>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:id="@+id/headShadow"
         android:src="@drawable/head_shadow"
         android:layout_below="@id/mainHead"
-        android:layout_marginTop="-15dp"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -49,7 +50,7 @@
         android:id="@+id/mainMenu">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:paddingLeft="@dimen/activity_horizontal_margin"

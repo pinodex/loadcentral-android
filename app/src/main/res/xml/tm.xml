@@ -4,6 +4,10 @@
 	<product type="fixed" name="Aload 10" code="TMX10" />
 	<product type="fixed" name="Aload 50" code="TMX50" />
 	<product type="fixed" name="Aload 100" code="TMX100" />
+	<product type="fixed" name="GO Surf 10" code="GOSURF10" />
+	<product type="fixed" name="GO Surf 15" code="GOSURF15" />
+	<product type="fixed" name="GO Surf 50" code="GOSURF50" />
+	<product type="fixed" name="GO Surf 99" code="GOSURF99" />
 	<product type="fixed" name="Astig FB 10" code="ASTIGFB10" />
 	<product type="fixed" name="Astig Text 10" code="ASTIGTXT10" />
 	<product type="fixed" name="Astig Text 15" code="ASTIGTXT15" />
